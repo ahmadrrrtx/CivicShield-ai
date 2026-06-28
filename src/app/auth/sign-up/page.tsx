@@ -1,7 +1,5 @@
-import { redirectIfAuthenticated } from '@/lib/auth-guards';
 import { AuthForm } from '@/components/auth/auth-form';
 
-export default async function SignUpPage() {
-  await redirectIfAuthenticated();
+export default function SignUpPage() {
   return <div className="px-4 py-10 sm:px-6 lg:px-8"><AuthForm mode="sign-up" /></div>;
 }

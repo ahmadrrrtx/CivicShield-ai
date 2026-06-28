@@ -31,13 +31,19 @@ export async function getCurrentSession(): Promise<AppSession> {
   const id = existingGuest || crypto.randomUUID();
 
   if (!existingGuest) {
-    store.set(GUEST_SESSION_COOKIE, id, {
-      httpOnly: true,
-      sameSite: 'lax',
-      secure: process.env.NODE_ENV === 'production',
-      path: '/',
-      maxAge: 60 * 60 * 24 * 30
-    });
+    try {
+      store.set(GUEST_SESSION_COOKIE, id, {
+        httpOnly: true,
+        sameSite: 'lax',
+        secure: process.env.NODE_ENV === 'production',
+        path: '/',
+        maxAge: 60 * 60 * 24 * 30
+      });
+    } catch {
+      // Middleware normally sets this cookie. Server Components cannot always
+      // mutate cookies, so fall back to an in-memory request id instead of
+      // crashing public/auth pages.
+    }
   }
 
   return {
