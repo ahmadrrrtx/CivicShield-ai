@@ -1,0 +1,139 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String         @id @default(cuid())
+  name          String?
+  email         String         @unique
+  emailVerified Boolean        @default(false)
+  image         String?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  sessions      Session[]
+  accounts      Account[]
+  conversations Conversation[]
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  userId    String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Account {
+  id                    String   @id @default(cuid())
+  accountId             String
+  providerId            String
+  userId                String
+  accessToken           String?
+  refreshToken          String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+  user                  User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Verification {
+  id         String   @id @default(cuid())
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model AppSettings {
+  id                  String   @id @default(cuid())
+  scopeType           String
+  scopeId             String   @unique
+  provider            String   @default("groq")
+  encryptedGroqApiKey String?
+  theme               String   @default("system")
+  language            String   @default("en")
+  migratedFromFile    Boolean  @default(false)
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+}
+
+model Conversation {
+  id                String                @id @default(cuid())
+  scopeType         String
+  scopeId           String
+  userId            String?
+  title             String
+  latestUserMessage String
+  latestAnswer      String
+  confidence        Float
+  grounded          Boolean
+  provider          String
+  model             String
+  citationCount     Int                   @default(0)
+  country           String?
+  pinned            Boolean               @default(false)
+  reviewStatus      String                @default("open")
+  reviewNote        String?
+  reviewedAt        DateTime?
+  createdAt         DateTime              @default(now())
+  updatedAt         DateTime              @updatedAt
+  user              User?                 @relation(fields: [userId], references: [id], onDelete: SetNull)
+  messages          ConversationMessage[]
+
+  @@index([scopeType, scopeId, updatedAt])
+  @@index([userId, updatedAt])
+}
+
+model ConversationMessage {
+  id             String   @id @default(cuid())
+  conversationId String
+  role           String
+  content        String
+  confidence     String?
+  disclaimer     String?
+  citationsJson  String?
+  isError        Boolean  @default(false)
+  feedback       String?
+  createdAt      DateTime @default(now())
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  @@index([conversationId, createdAt])
+}
+
+model AuditEvent {
+  id          String   @id @default(cuid())
+  event       String
+  level       String
+  actorType   String?
+  actorId     String?
+  scopeType   String?
+  scopeId     String?
+  targetType  String?
+  targetId    String?
+  payloadJson String?
+  createdAt   DateTime @default(now())
+
+  @@index([event, createdAt])
+  @@index([scopeType, scopeId, createdAt])
+  @@index([targetType, targetId, createdAt])
+}
+
+model ReviewerAccess {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  active    Boolean  @default(true)
+  notes     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

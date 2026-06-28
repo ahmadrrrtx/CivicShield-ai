@@ -1,0 +1,16 @@
+<svg width="512" height="128" viewBox="0 0 512 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g" x1="24" y1="12" x2="100" y2="108" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#60A5FA"/>
+      <stop offset="0.5" stop-color="#4F46E5"/>
+      <stop offset="1" stop-color="#06B6D4"/>
+    </linearGradient>
+  </defs>
+  <path d="M64 10C77.4 18.8 92 23.2 107.8 23.4V52.4C107.8 75.9 92.8 97.2 70.3 105.7L64 108.2L57.7 105.7C35.2 97.2 20.2 75.9 20.2 52.4V23.4C36 23.2 50.6 18.8 64 10Z" fill="url(#g)"/>
+  <path d="M48 65C53.1 55.4 59.4 50.5 67 50.5C74.5 50.5 80.4 54.5 84.7 62.3" stroke="white" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="51.5" cy="71.2" r="3.5" fill="white"/>
+  <circle cx="76.7" cy="71.2" r="3.5" fill="white"/>
+  <path d="M58 82C59.9 83.8 61.8 84.5 64 84.5C66.1 84.5 68.1 83.8 70 82" stroke="white" stroke-width="4" stroke-linecap="round"/>
+  <text x="132" y="58" fill="#0F172A" font-size="34" font-family="Inter, Arial, sans-serif" font-weight="700">CivicShield AI</text>
+  <text x="132" y="84" fill="#64748B" font-size="14" font-family="Inter, Arial, sans-serif" font-weight="600" letter-spacing="2">TRUSTED PUBLIC GUIDANCE</text>
+</svg>

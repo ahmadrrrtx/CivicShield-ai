@@ -1,0 +1,83 @@
+@import 'tailwindcss';
+
+:root {
+  --background: #f6f8fb;
+  --foreground: #0b1220;
+  --muted: #64748b;
+  --card: rgba(255, 255, 255, 0.84);
+  --border: rgba(148, 163, 184, 0.22);
+}
+
+.dark {
+  --background: #020617;
+  --foreground: #f8fafc;
+  --muted: #94a3b8;
+  --card: rgba(2, 6, 23, 0.72);
+  --border: rgba(51, 65, 85, 0.55);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background:
+    radial-gradient(circle at top, rgba(96, 165, 250, 0.12), transparent 30%),
+    radial-gradient(circle at 80% 0%, rgba(99, 102, 241, 0.12), transparent 25%),
+    var(--background);
+  color: var(--foreground);
+  font-feature-settings: 'rlig' 1, 'calt' 1;
+}
+
+::selection {
+  background: rgba(59, 130, 246, 0.22);
+}
+
+* {
+  border-color: var(--border);
+}
+
+.focus-ring {
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/70;
+}
+
+.prose-legal h1,
+.prose-legal h2,
+.prose-legal h3 {
+  @apply tracking-[-0.03em] text-slate-950 dark:text-white;
+}
+
+.prose-legal h1 {
+  @apply text-4xl font-semibold;
+}
+
+.prose-legal h2 {
+  @apply mt-10 text-2xl font-semibold;
+}
+
+.prose-legal h3 {
+  @apply mt-6 text-lg font-semibold;
+}
+
+.prose-legal p,
+.prose-legal li {
+  @apply text-sm leading-7 text-slate-600 dark:text-slate-300;
+}
+
+.prose-legal ul {
+  @apply ml-5 list-disc space-y-2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
