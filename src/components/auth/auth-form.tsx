@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 
 export function AuthForm({ mode }: { mode: 'sign-in' | 'sign-up' }) {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [status, setStatus] = useState<string | null>(null);
@@ -23,7 +24,7 @@ export function AuthForm({ mode }: { mode: 'sign-in' | 'sign-up' }) {
       const response = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify(mode === 'sign-up' ? { name, email, password } : { email, password })
       });
 
       if (!response.ok) {
@@ -52,15 +53,21 @@ export function AuthForm({ mode }: { mode: 'sign-in' | 'sign-up' }) {
         Email and password auth is now enabled. Google OAuth can be added later without changing the current account foundation.
       </p>
       <div className="mt-6 space-y-4">
+        {mode === 'sign-up' ? (
+          <div>
+            <label className="mb-2 block text-sm font-medium text-slate-900 dark:text-white" htmlFor="name">Name</label>
+            <Input id="name" type="text" value={name} onChange={(event) => setName(event.target.value)} placeholder="Your name" />
+          </div>
+        ) : null}
         <div>
-          <label className="mb-2 block text-sm font-medium text-slate-900 dark:text-white">Email</label>
-          <Input type="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="you@example.com" />
+          <label className="mb-2 block text-sm font-medium text-slate-900 dark:text-white" htmlFor="email">Email</label>
+          <Input id="email" type="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="you@example.com" />
         </div>
         <div>
-          <label className="mb-2 block text-sm font-medium text-slate-900 dark:text-white">Password</label>
-          <Input type="password" value={password} onChange={(event) => setPassword(event.target.value)} placeholder="••••••••" />
+          <label className="mb-2 block text-sm font-medium text-slate-900 dark:text-white" htmlFor="password">Password</label>
+          <Input id="password" type="password" value={password} onChange={(event) => setPassword(event.target.value)} placeholder="••••••••" />
         </div>
-        <Button onClick={handleSubmit} disabled={loading || !email || !password} className="w-full">
+        <Button onClick={handleSubmit} disabled={loading || !email || !password || (mode === 'sign-up' && !name.trim())} className="w-full">
           {loading ? 'Working…' : mode === 'sign-up' ? 'Create account' : 'Sign in'}
         </Button>
         {status ? <p className="text-sm text-slate-600 dark:text-slate-300">{status}</p> : null}
