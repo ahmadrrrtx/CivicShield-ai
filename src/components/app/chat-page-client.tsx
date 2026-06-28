@@ -5,11 +5,12 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
-import { EmergencyShortcuts } from '@/components/app/emergency-shortcuts';
-import { ChatComposer } from '@/components/app/chat-composer';
+import { ChatComposer, NEED_OPTIONS, type NeedOptionValue } from '@/components/app/chat-composer';
 import { ChatEmptyState } from '@/components/app/chat-empty-state';
 import { ChatMessageList } from '@/components/app/chat-message-list';
 import { SourcePanel } from '@/components/app/source-panel';
+import { TrustMetricsPanel } from '@/components/app/trust-metrics-panel';
+import { WhyThisAnswerPanel } from '@/components/app/why-this-answer-panel';
 import { type ChatConfidenceLevel, type ChatMessageRecord, type ChatCitation } from '@/components/app/chat-demo-data';
 
 function mapConfidence(confidence: number): ChatConfidenceLevel {
@@ -50,21 +51,34 @@ export function ChatPageClient({
   initialCitations,
   conversationId,
   sessionLabel,
-  conversationTitle
+  conversationTitle,
+  initialPrompt,
+  initialCountry
 }: {
   initialMessages: ChatMessageRecord[];
   initialCitations: ChatCitation[];
   conversationId?: string;
   sessionLabel: string;
   conversationTitle?: string;
+  initialPrompt?: string;
+  initialCountry?: string;
 }) {
   const router = useRouter();
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState(initialPrompt ?? '');
+  const [country, setCountry] = useState(initialCountry || 'United States');
+  const [need, setNeed] = useState<NeedOptionValue>('benefits');
   const [messages, setMessages] = useState<ChatMessageRecord[]>(initialMessages);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [activeCitations, setActiveCitations] = useState<ChatCitation[]>(initialCitations);
 
   const hasLiveConversation = messages.length > 0;
+  const latestAssistant = [...messages].reverse().find((message) => message.role === 'assistant' && !message.isStreaming);
+  const selectedNeed = NEED_OPTIONS.find((item) => item.value === need) ?? NEED_OPTIONS[0];
+
+  function handlePromptSelect(prompt: string, nextNeed: NeedOptionValue) {
+    setQuery(prompt);
+    setNeed(nextNeed);
+  }
 
   async function handleSubmit() {
     const trimmed = query.trim();
@@ -81,7 +95,7 @@ export function ChatPageClient({
     const placeholderMessage: ChatMessageRecord = {
       id: placeholderId,
       role: 'assistant',
-      content: 'Resolving your session context, loading any recent transcript history, validating trusted evidence policy, and preparing a grounded response.',
+      content: 'Checking official sources, verifying citations, and preparing safe next steps.',
       timestamp: 'Just now',
       confidence: 'low',
       isStreaming: true
@@ -98,8 +112,9 @@ export function ChatPageClient({
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          messages: [{ role: 'user', content: trimmed }],
-          country: 'United States',
+          messages: [{ role: 'user', content: `${trimmed}\n\nHelp type: ${selectedNeed.label}. Retrieval hint: ${selectedNeed.hint}.` }],
+          country,
+          departmentHint: selectedNeed.hint,
           conversationId
         })
       });
@@ -286,10 +301,10 @@ export function ChatPageClient({
                 {sessionLabel}
               </Badge>
               <h1 className="mt-4 text-3xl font-semibold tracking-[-0.05em] text-slate-950 dark:text-white lg:text-4xl">
-                {conversationId ? 'Continue your verified conversation.' : 'Ask about benefits, public services, or urgent support.'}
+                {conversationId ? 'Continue your verified conversation.' : 'What do you need help with today?'}
               </h1>
               <p className="mt-3 text-sm leading-7 text-slate-600 dark:text-slate-300">
-                CivicShield AI can now continue a saved conversation while still retrieving fresh official evidence for each new turn before answering.
+                Choose your country and help type first. CivicShield will check official sources, show confidence, and avoid guessing when evidence is weak.
               </p>
               {conversationTitle ? (
                 <div className="mt-4 flex flex-wrap items-center gap-2">
@@ -302,26 +317,33 @@ export function ChatPageClient({
             </div>
           </div>
           <div className="mt-6">
-            <ChatComposer value={query} onChange={setQuery} onSubmit={handleSubmit} isSubmitting={isSubmitting} />
+            <ChatComposer
+              value={query}
+              onChange={setQuery}
+              onSubmit={handleSubmit}
+              isSubmitting={isSubmitting}
+              country={country}
+              onCountryChange={setCountry}
+              need={need}
+              onNeedChange={setNeed}
+            />
           </div>
         </div>
       </Card>
 
-      <EmergencyShortcuts />
-
-      {!hasLiveConversation ? <ChatEmptyState /> : null}
+      {!hasLiveConversation ? <ChatEmptyState onPromptSelect={handlePromptSelect} /> : null}
 
       <div className="grid gap-6 xl:grid-cols-[minmax(0,1.35fr)_minmax(320px,0.65fr)]">
         <Card className="p-5 lg:p-7">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-blue-600 dark:text-blue-400">Conversation</p>
             <h2 className="mt-3 text-2xl font-semibold tracking-[-0.04em] text-slate-950 dark:text-white">
-              {conversationId ? 'Resumed conversation' : 'Secure session answer preview'}
+              {conversationId ? 'Resumed conversation' : 'Your answer workspace'}
             </h2>
             <p className="mt-2 text-sm leading-7 text-slate-600 dark:text-slate-300">
               {conversationId
                 ? 'Recent transcript context is used only to maintain continuity. Each new answer still depends on newly retrieved verified evidence.'
-                : 'The app scopes settings to a secure session and preserves evidence-first answer behavior.'}
+                : 'Your conversation stays focused on plain-language next steps, visible citations, and confidence signals.'}
             </p>
           </div>
           <div className="mt-6">
@@ -329,7 +351,9 @@ export function ChatPageClient({
           </div>
         </Card>
 
-        <div className="space-y-6">
+        <div className="space-y-6 xl:sticky xl:top-24 xl:self-start">
+          <TrustMetricsPanel citations={citationsForPanel} latestConfidence={latestAssistant?.confidence} country={country} />
+          <WhyThisAnswerPanel citations={citationsForPanel} confidence={latestAssistant?.confidence} />
           <SourcePanel citations={citationsForPanel} />
         </div>
       </div>
