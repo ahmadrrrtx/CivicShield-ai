@@ -19,8 +19,16 @@
 ## Why CivicShield AI exists
 CivicShield AI is built to help people navigate public benefits, government services, and urgent support pathways without sacrificing trust. The product is designed so the AI should not invent civic facts, should preserve citations, and should fail closed when evidence cannot be verified safely.
 
-## Screenshots
-Place repository screenshots in a future `/docs/screenshots` directory and reference them here for GitHub publication.
+## Screenshots and demo assets
+Add final deployed screenshots before hackathon submission:
+
+- Landing page
+- Chat answer with verified citations
+- Conversation history
+- Reviewer queue
+- Audit export
+
+Recommended path: `docs/screenshots/`.
 
 ## Feature highlights
 - Evidence-first civic AI chat
@@ -172,7 +180,28 @@ flowchart TD
 8. Run `npm run dev`
 
 ## Environment variables
-See:
+
+Minimum production deployment variables:
+
+| Variable | Required | Secret | Notes |
+| --- | --- | --- | --- |
+| `NEXT_PUBLIC_APP_URL` | Yes | No | Must match the deployed Vercel URL or custom domain. |
+| `NEXT_PUBLIC_APP_NAME` | Yes | No | Example: `CivicShield AI`. |
+| `BETTER_AUTH_SECRET` | Yes | Yes | Generate with `node scripts/generate-local-secrets.mjs` or `openssl rand -hex 32`. |
+| `ENCRYPTION_KEY` | Yes | Yes | Used to encrypt scoped provider API keys. Generate locally. |
+| `DATABASE_URL` | Yes | Yes | Hosted PostgreSQL URL from Neon, Supabase, Railway, or equivalent. |
+| `GROQ_API_KEY` | Recommended | Yes | Server-level Groq key for AI responses. Users can also save a scoped key in Settings. |
+| `GROQ_BASE_URL` | Optional | No | Defaults to `https://api.groq.com/openai/v1`. |
+| `GROQ_DEFAULT_MODEL` | Optional | No | Defaults to `llama-3.3-70b-versatile`. |
+| `RETRIEVAL_TIMEOUT_MS` | Optional | No | Defaults to `5000`. |
+| `RETRIEVAL_MAX_BYTES` | Optional | No | Defaults to `60000`. |
+| `RETRIEVAL_CACHE_TTL_MS` | Optional | No | Defaults to `300000`. |
+| `AI_PROVIDER_TIMEOUT_MS` | Optional | No | Defaults to `15000`. |
+| `REVIEWER_EMAIL_ALLOWLIST` | Recommended | Semi-sensitive | Comma-separated reviewer bootstrap emails. |
+| `REVIEW_AUDIT_PAGE_SIZE` | Optional | No | Defaults to `20`. |
+| `REVIEWER_MANAGEMENT_PAGE_SIZE` | Optional | No | Defaults to `20`. |
+
+See also:
 - `.env.example`
 - `.env.local.example`
 - `scripts/production-env-checklist.md`
@@ -182,7 +211,7 @@ See:
 - Provision PostgreSQL
 - Set `DATABASE_URL`
 - Generate Prisma client
-- Apply migrations with `prisma migrate deploy` in production
+- Commit Prisma migrations and apply them with `prisma migrate deploy` in production
 
 ## Commands
 - `npm run dev`
@@ -193,6 +222,7 @@ See:
 - `npm run test`
 - `npm run prisma:generate`
 - `npm run prisma:migrate:dev`
+- `npm run prisma:migrate:deploy`
 
 ## Deployment
 Start with:
@@ -225,6 +255,14 @@ Start with:
 - `THREAT_MODEL.md`
 - `RELEASE_NOTES.md`
 - `LAUNCH_READINESS.md`
+
+
+## Known limitations
+- The MVP currently focuses on a small allowlist of official U.S. public-service sources.
+- Groq is the only active AI provider; other provider entries are placeholders for future expansion.
+- AI streaming is not enabled in this build.
+- Email verification, password reset, and Google OAuth are not enabled yet.
+- Production launch requires committed Prisma migrations and live database verification.
 
 ## License
 MIT — see `LICENSE`.

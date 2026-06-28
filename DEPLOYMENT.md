@@ -40,6 +40,7 @@ Set these in Vercel Project Settings → Environment Variables.
 - `RETRIEVAL_TIMEOUT_MS`
 - `RETRIEVAL_MAX_BYTES`
 - `RETRIEVAL_CACHE_TTL_MS`
+- `AI_PROVIDER_TIMEOUT_MS`
 
 ### Reviewer / governance environment support
 - `REVIEWER_EMAIL_ALLOWLIST`
@@ -56,6 +57,7 @@ Set these in Vercel Project Settings → Environment Variables.
 - `RETRIEVAL_TIMEOUT_MS=5000`
 - `RETRIEVAL_MAX_BYTES=60000`
 - `RETRIEVAL_CACHE_TTL_MS=300000`
+- `AI_PROVIDER_TIMEOUT_MS=15000`
 - `GROQ_BASE_URL=https://api.groq.com/openai/v1`
 - `GROQ_DEFAULT_MODEL=llama-3.3-70b-versatile`
 
@@ -64,6 +66,7 @@ Set these in Vercel Project Settings → Environment Variables.
 - `BETTER_AUTH_SECRET` should be a long random secret
 - `ENCRYPTION_KEY` should be a long random secret
 - `DATABASE_URL` must be a real hosted PostgreSQL URL
+- commit Prisma migration files before relying on `prisma migrate deploy`
 
 ## 4) Run Prisma migration against the hosted database
 You have two safe options.
@@ -72,6 +75,7 @@ You have two safe options.
 Run:
 - `npm install`
 - `npx prisma migrate dev --name init`
+- commit the generated `prisma/migrations` directory
 
 ### Option B — if you do not run locally
 Use a hosted shell / CI step / Codespace / one-time remote execution environment and run:

@@ -14,6 +14,7 @@
 - `RETRIEVAL_TIMEOUT_MS`
 - `RETRIEVAL_MAX_BYTES`
 - `RETRIEVAL_CACHE_TTL_MS`
+- `AI_PROVIDER_TIMEOUT_MS`
 
 ### Optional AI provider variables
 - `GROQ_API_KEY`
@@ -28,6 +29,7 @@
 - `RETRIEVAL_TIMEOUT_MS=5000`
 - `RETRIEVAL_MAX_BYTES=60000`
 - `RETRIEVAL_CACHE_TTL_MS=300000`
+- `AI_PROVIDER_TIMEOUT_MS=15000`
 
 ## Secret generation guidance
 Use long random secrets for:

@@ -22,3 +22,5 @@ prisma/dev.db-journal
 
 # generated
 prisma/generated
+# TypeScript incremental
+*.tsbuildinfo

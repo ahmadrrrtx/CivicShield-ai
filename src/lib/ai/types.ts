@@ -1,6 +1,6 @@
 export type AIProviderId = 'groq' | 'gemini' | 'mistral' | 'cerebras' | 'openrouter' | 'ollama';
 
-export type AIMessageRole = 'system' | 'user' | 'assistant';
+export type AIMessageRole = 'user' | 'assistant';
 
 export interface AIMessage {
   role: AIMessageRole;

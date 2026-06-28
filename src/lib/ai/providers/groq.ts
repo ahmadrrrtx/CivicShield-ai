@@ -1,4 +1,4 @@
-import { env } from '@/lib/env';
+import { env, serverEnv } from '@/lib/env';
 import type { AIChatRequest, AIHealthStatus, AIProviderAdapter, AIResponseEnvelope, VerifiedEvidenceItem } from '@/lib/ai/types';
 import { aiResponseEnvelopeSchema } from '@/lib/ai/schemas';
 import { buildGroundedSystemPrompt } from '@/lib/ai/prompts';
@@ -7,6 +7,10 @@ import { verifyCitationsAgainstEvidence } from '@/lib/retrieval/verify';
 import { applyResponsePolicy, evaluateEvidencePolicy } from '@/lib/policy';
 
 const MINIMUM_VERIFIED_EVIDENCE = 1;
+
+function isAbortError(error: unknown) {
+  return error instanceof DOMException && error.name === 'AbortError';
+}
 
 async function healthCheck(): Promise<AIHealthStatus> {
   const hasConfiguredKey = Boolean(process.env.GROQ_API_KEY);
@@ -54,25 +58,40 @@ async function generateResponse(
     return buildLowConfidenceFallback(evidencePolicy.reason ?? 'No verified official evidence was available for this request.');
   }
 
-  const response = await fetch(`${env.GROQ_BASE_URL}/chat/completions`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${apiKey}`
-    },
-    body: JSON.stringify({
-      model: env.GROQ_DEFAULT_MODEL,
-      temperature: 0.1,
-      response_format: { type: 'json_object' },
-      messages: [
-        {
-          role: 'system',
-          content: buildGroundedSystemPrompt(input, evidence)
-        },
-        ...input.messages
-      ]
-    })
-  });
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), serverEnv.AI_PROVIDER_TIMEOUT_MS);
+
+  let response: Response;
+
+  try {
+    response = await fetch(`${env.GROQ_BASE_URL}/chat/completions`, {
+      method: 'POST',
+      signal: controller.signal,
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${apiKey}`
+      },
+      body: JSON.stringify({
+        model: env.GROQ_DEFAULT_MODEL,
+        temperature: 0.1,
+        response_format: { type: 'json_object' },
+        messages: [
+          {
+            role: 'system',
+            content: buildGroundedSystemPrompt(input, evidence)
+          },
+          ...input.messages
+        ]
+      })
+    });
+  } catch (error) {
+    if (isAbortError(error)) {
+      return buildLowConfidenceFallback('The AI provider timed out before returning a verified answer.');
+    }
+    throw error;
+  } finally {
+    clearTimeout(timeout);
+  }
 
   if (!response.ok) {
     throw new Error(`Groq request failed with status ${response.status}`);
@@ -124,7 +143,7 @@ export function createGroqProvider(customApiKey?: string): AIProviderAdapter {
     id: 'groq',
     label: 'Groq',
     enabled: true,
-    supportsStreaming: true,
+    supportsStreaming: false,
     healthCheck,
     generateResponse: async (input, evidence, options) =>
       generateResponse(input, evidence, {
@@ -137,7 +156,7 @@ export const groqProvider: AIProviderAdapter = {
   id: 'groq',
   label: 'Groq',
   enabled: true,
-  supportsStreaming: true,
+  supportsStreaming: false,
   healthCheck,
   generateResponse
 };

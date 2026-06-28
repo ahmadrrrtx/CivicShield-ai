@@ -15,7 +15,8 @@ const serverEnvSchema = z.object({
   DATABASE_URL: z.string().url().or(z.string().startsWith('postgresql://')),
   RETRIEVAL_TIMEOUT_MS: z.coerce.number().int().min(1000).max(15000).default(5000),
   RETRIEVAL_MAX_BYTES: z.coerce.number().int().min(2000).max(500000).default(60000),
-  RETRIEVAL_CACHE_TTL_MS: z.coerce.number().int().min(1000).max(3600000).default(300000)
+  RETRIEVAL_CACHE_TTL_MS: z.coerce.number().int().min(1000).max(3600000).default(300000),
+  AI_PROVIDER_TIMEOUT_MS: z.coerce.number().int().min(3000).max(30000).default(15000)
 });
 
 const publicEnvInput = {
@@ -33,7 +34,8 @@ const serverEnvInput = {
   DATABASE_URL: process.env.DATABASE_URL,
   RETRIEVAL_TIMEOUT_MS: process.env.RETRIEVAL_TIMEOUT_MS,
   RETRIEVAL_MAX_BYTES: process.env.RETRIEVAL_MAX_BYTES,
-  RETRIEVAL_CACHE_TTL_MS: process.env.RETRIEVAL_CACHE_TTL_MS
+  RETRIEVAL_CACHE_TTL_MS: process.env.RETRIEVAL_CACHE_TTL_MS,
+  AI_PROVIDER_TIMEOUT_MS: process.env.AI_PROVIDER_TIMEOUT_MS
 };
 
 let cachedEnv: z.infer<typeof envSchema> | null = null;
@@ -76,6 +78,7 @@ export function getRuntimeDiagnostics() {
     retrievalTimeoutMs: serverParsed.success ? serverParsed.data.RETRIEVAL_TIMEOUT_MS : undefined,
     retrievalMaxBytes: serverParsed.success ? serverParsed.data.RETRIEVAL_MAX_BYTES : undefined,
     retrievalCacheTtlMs: serverParsed.success ? serverParsed.data.RETRIEVAL_CACHE_TTL_MS : undefined,
+    aiProviderTimeoutMs: serverParsed.success ? serverParsed.data.AI_PROVIDER_TIMEOUT_MS : undefined,
     publicEnvValid: publicParsed.success,
     serverEnvValid: serverParsed.success,
     missingPublicEnv: publicParsed.success ? [] : publicParsed.error.issues.map((issue) => issue.path.join('.')),

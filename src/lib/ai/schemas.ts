@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 export const aiMessageSchema = z.object({
-  role: z.enum(['system', 'user', 'assistant']),
+  role: z.enum(['user', 'assistant']),
   content: z.string().min(1).max(4000)
 });
 
