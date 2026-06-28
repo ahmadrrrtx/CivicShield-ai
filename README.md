@@ -1,7 +1,7 @@
 # CivicShield AI
 
 <p align="center">
-  <img src="public/brand/logo.svg" alt="CivicShield AI logo" width="96" />
+  <img src="public/brand/logo.svg" alt="CivicShield AI logo" width="180" />
 </p>
 
 <p align="center"><strong>Trusted AI guidance for public services, grounded in official sources.</strong></p>
