@@ -1,16 +1,26 @@
-<svg width="512" height="128" viewBox="0 0 512 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="420" height="120" viewBox="0 0 420 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="420" height="120" rx="32" fill="#F8FBFF"/>
+  <g filter="url(#glow)">
+    <path d="M64 18C78.7 27.8 94.2 32.9 110.8 33.4V61.8C110.8 84.9 96.2 105.6 74.3 113.5L64 117.2L53.7 113.5C31.8 105.6 17.2 84.9 17.2 61.8V33.4C33.8 32.9 49.3 27.8 64 18Z" fill="url(#shield)"/>
+  </g>
+  <path d="M64 34.7C74.1 41.1 84.8 44.7 96.1 45.3V60C96.1 77.7 85.1 94 68.3 100.9L64 102.7L59.7 100.9C42.9 94 31.9 77.7 31.9 60V45.3C43.2 44.7 53.9 41.1 64 34.7Z" fill="white" fill-opacity="0.18"/>
+  <path d="M43.5 68.5H84.5" stroke="white" stroke-width="5.5" stroke-linecap="round"/>
+  <path d="M51 59.5L64 48.5L77 59.5" stroke="white" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M53 80.5H75" stroke="white" stroke-width="5.5" stroke-linecap="round"/>
+  <circle cx="43.5" cy="68.5" r="4.5" fill="white"/>
+  <circle cx="84.5" cy="68.5" r="4.5" fill="white"/>
+  <text x="135" y="56" fill="#0F172A" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="34" font-weight="850" letter-spacing="-1.8">CivicShield AI</text>
+  <text x="137" y="83" fill="#2563EB" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="13" font-weight="800" letter-spacing="2.6">PUBLIC HELP, VERIFIED</text>
   <defs>
-    <linearGradient id="g" x1="24" y1="12" x2="100" y2="108" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#60A5FA"/>
-      <stop offset="0.5" stop-color="#4F46E5"/>
-      <stop offset="1" stop-color="#06B6D4"/>
+    <linearGradient id="shield" x1="24" y1="22" x2="103" y2="111" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#38BDF8"/>
+      <stop offset="0.46" stop-color="#2563EB"/>
+      <stop offset="1" stop-color="#10B981"/>
     </linearGradient>
+    <filter id="glow" x="-4" y="-4" width="136" height="145" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="7" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.145 0 0 0 0 0.388 0 0 0 0 0.922 0 0 0 0.22 0"/>
+      <feBlend in2="SourceGraphic" mode="normal"/>
+    </filter>
   </defs>
-  <path d="M64 10C77.4 18.8 92 23.2 107.8 23.4V52.4C107.8 75.9 92.8 97.2 70.3 105.7L64 108.2L57.7 105.7C35.2 97.2 20.2 75.9 20.2 52.4V23.4C36 23.2 50.6 18.8 64 10Z" fill="url(#g)"/>
-  <path d="M48 65C53.1 55.4 59.4 50.5 67 50.5C74.5 50.5 80.4 54.5 84.7 62.3" stroke="white" stroke-width="5" stroke-linecap="round"/>
-  <circle cx="51.5" cy="71.2" r="3.5" fill="white"/>
-  <circle cx="76.7" cy="71.2" r="3.5" fill="white"/>
-  <path d="M58 82C59.9 83.8 61.8 84.5 64 84.5C66.1 84.5 68.1 83.8 70 82" stroke="white" stroke-width="4" stroke-linecap="round"/>
-  <text x="132" y="58" fill="#0F172A" font-size="34" font-family="Inter, Arial, sans-serif" font-weight="700">CivicShield AI</text>
-  <text x="132" y="84" fill="#64748B" font-size="14" font-family="Inter, Arial, sans-serif" font-weight="600" letter-spacing="2">TRUSTED PUBLIC GUIDANCE</text>
 </svg>
