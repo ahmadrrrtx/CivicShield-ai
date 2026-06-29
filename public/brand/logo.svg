@@ -1,26 +1,37 @@
-<svg width="420" height="120" viewBox="0 0 420 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="420" height="120" rx="32" fill="#F8FBFF"/>
-  <g filter="url(#glow)">
-    <path d="M64 18C78.7 27.8 94.2 32.9 110.8 33.4V61.8C110.8 84.9 96.2 105.6 74.3 113.5L64 117.2L53.7 113.5C31.8 105.6 17.2 84.9 17.2 61.8V33.4C33.8 32.9 49.3 27.8 64 18Z" fill="url(#shield)"/>
-  </g>
-  <path d="M64 34.7C74.1 41.1 84.8 44.7 96.1 45.3V60C96.1 77.7 85.1 94 68.3 100.9L64 102.7L59.7 100.9C42.9 94 31.9 77.7 31.9 60V45.3C43.2 44.7 53.9 41.1 64 34.7Z" fill="white" fill-opacity="0.18"/>
-  <path d="M43.5 68.5H84.5" stroke="white" stroke-width="5.5" stroke-linecap="round"/>
-  <path d="M51 59.5L64 48.5L77 59.5" stroke="white" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M53 80.5H75" stroke="white" stroke-width="5.5" stroke-linecap="round"/>
-  <circle cx="43.5" cy="68.5" r="4.5" fill="white"/>
-  <circle cx="84.5" cy="68.5" r="4.5" fill="white"/>
-  <text x="135" y="56" fill="#0F172A" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="34" font-weight="850" letter-spacing="-1.8">CivicShield AI</text>
-  <text x="137" y="83" fill="#2563EB" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="13" font-weight="800" letter-spacing="2.6">PUBLIC HELP, VERIFIED</text>
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="shield" x1="24" y1="22" x2="103" y2="111" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#38BDF8"/>
-      <stop offset="0.46" stop-color="#2563EB"/>
-      <stop offset="1" stop-color="#10B981"/>
+    <linearGradient id="bg" x1="40" y1="28" x2="212" y2="228" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7DD3FC"/>
+      <stop offset="0.34" stop-color="#3B82F6"/>
+      <stop offset="0.72" stop-color="#1D4ED8"/>
+      <stop offset="1" stop-color="#14B8A6"/>
     </linearGradient>
-    <filter id="glow" x="-4" y="-4" width="136" height="145" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-      <feGaussianBlur stdDeviation="7" result="blur"/>
-      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.145 0 0 0 0 0.388 0 0 0 0 0.922 0 0 0 0.22 0"/>
-      <feBlend in2="SourceGraphic" mode="normal"/>
+    <linearGradient id="inner" x1="64" y1="56" x2="184" y2="198" gradientUnits="userSpaceOnUse">
+      <stop stop-color="rgba(255,255,255,0.52)"/>
+      <stop offset="1" stop-color="rgba(255,255,255,0.08)"/>
+    </linearGradient>
+    <filter id="glow" x="-32" y="-32" width="320" height="320" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.129 0 0 0 0 0.412 0 0 0 0 0.961 0 0 0 0.28 0"/>
+      <feBlend in="SourceGraphic" in2="blur" mode="screen"/>
+    </filter>
+    <filter id="shadow" x="18" y="18" width="220" height="220" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feOffset dy="12"/>
+      <feGaussianBlur stdDeviation="12"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.0588 0 0 0 0 0.0941 0 0 0 0 0.1647 0 0 0 0.24 0"/>
+      <feBlend in="SourceGraphic" mode="normal"/>
     </filter>
   </defs>
+  <g filter="url(#glow)">
+    <g filter="url(#shadow)">
+      <path d="M128 22C157.957 42.4731 189.657 52.7014 222 53.7254V113.391C222 162.704 190.091 207.396 142.441 224.807L128 230L113.559 224.807C65.9094 207.396 34 162.704 34 113.391V53.7254C66.3432 52.7014 98.043 42.4731 128 22Z" fill="url(#bg)"/>
+      <path d="M128 48C149.814 61.6634 172.612 68.9203 196 70.0197V110.133C196 148.456 172.307 183.896 136.681 197.145L128 200.374L119.319 197.145C83.693 183.896 60 148.456 60 110.133V70.0197C83.3884 68.9203 106.186 61.6634 128 48Z" fill="white" fill-opacity="0.14"/>
+      <path d="M87 106.5C87 101.253 91.2533 97 96.5 97H150C171.815 97 189.5 114.685 189.5 136.5C189.5 158.315 171.815 176 150 176H116.915C112.926 176 109.1 177.585 106.279 180.406L94.7426 191.942C91.9028 194.782 87 192.771 87 188.754V106.5Z" fill="white" fill-opacity="0.18"/>
+      <path d="M105 96C105 79.4315 118.431 66 135 66H159.5C176.069 66 189.5 79.4315 189.5 96V101H135C118.431 101 105 114.431 105 131V96Z" fill="white" fill-opacity="0.24"/>
+      <path d="M109 119.5C109 115.358 112.358 112 116.5 112H148.5C152.642 112 156 115.358 156 119.5C156 123.642 152.642 127 148.5 127H116.5C112.358 127 109 123.642 109 119.5Z" fill="white"/>
+      <path d="M109 146.5C109 142.358 112.358 139 116.5 139H160.5C164.642 139 168 142.358 168 146.5C168 150.642 164.642 154 160.5 154H116.5C112.358 154 109 150.642 109 146.5Z" fill="white" fill-opacity="0.92"/>
+      <circle cx="94" cy="119.5" r="7" fill="white"/>
+      <circle cx="94" cy="146.5" r="7" fill="white" fill-opacity="0.92"/>
+    </g>
+  </g>
 </svg>

@@ -1,9 +1,9 @@
 export const siteConfig = {
   name: 'CivicShield AI',
-  tagline: 'Trusted AI guidance for public services, grounded in official sources.',
+  tagline: 'Official-source grounded guidance for public services under uncertainty.',
   description:
-    'A multilingual civic AI assistant that helps people understand public benefits, emergency assistance, legal information, and government services using official sources and visible citations.',
-  url: 'https://civicshield.ai',
+    'An official-source grounded civic AI assistant that helps people understand public benefits, housing help, emergency support, and government services with visible citations, confidence signals, and safer refusal when evidence is weak.',
+  url: 'https://civicshield-ai.vercel.app',
   ogImage: '/brand/og-image.svg',
   links: {
     github: '#',

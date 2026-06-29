@@ -21,7 +21,7 @@ export function Hero() {
         <div className="max-w-3xl text-center lg:text-left">
           <Reveal>
             <Badge className="border-blue-200 bg-white/75 text-blue-700 shadow-sm dark:border-blue-900/50 dark:bg-blue-950/40 dark:text-blue-300">
-              <Sparkles className="mr-1.5 h-3.5 w-3.5" /> Civic help, verified before answered
+              <Sparkles className="mr-1.5 h-3.5 w-3.5" /> Official-source grounded
             </Badge>
           </Reveal>
 
@@ -33,7 +33,7 @@ export function Hero() {
 
           <Reveal delay={0.14}>
             <p className="mx-auto mt-6 max-w-2xl text-pretty text-lg leading-8 text-slate-600 dark:text-slate-300 lg:mx-0">
-              CivicShield AI explains benefits, housing help, emergency support, and government services in plain language — with official sources, confidence signals, and clear next steps.
+              CivicShield AI helps people understand benefits, housing help, emergency support, and government services in plain language — with visible citations, confidence signals, and safer refusal when official evidence is too weak.
             </p>
           </Reveal>
 
@@ -70,7 +70,7 @@ export function Hero() {
 
           <Reveal delay={0.32}>
             <p className="mt-5 text-sm leading-6 text-slate-500 dark:text-slate-400">
-              Not a government agency. Not legal advice. Always links back to official sources when it can verify.
+              Not a government agency. Not legal advice. CivicShield is designed to ground answers in official sources, show its confidence, and say when it cannot confidently verify enough evidence.
             </p>
           </Reveal>
         </div>

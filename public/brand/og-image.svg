@@ -1,23 +1,44 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="1200" height="630" fill="#F6F8FB"/>
-  <circle cx="258" cy="110" r="260" fill="#DBEAFE"/>
-  <circle cx="980" cy="210" r="300" fill="#D1FAE5"/>
-  <circle cx="620" cy="610" r="340" fill="#E0E7FF"/>
-  <rect x="76" y="70" width="1048" height="490" rx="48" fill="white" fill-opacity="0.82" stroke="white" stroke-width="2"/>
-  <path d="M180 145C203 160.5 227.2 168.4 253 169.2V213.8C253 249.9 230.2 282.4 196 294.8L180 300.6L164 294.8C129.8 282.4 107 249.9 107 213.8V169.2C132.8 168.4 157 160.5 180 145Z" fill="url(#shield)"/>
-  <path d="M150 219H210" stroke="white" stroke-width="8" stroke-linecap="round"/>
-  <path d="M161 206L180 190L199 206" stroke="white" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="300" y="190" fill="#0F172A" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="42" font-weight="850" letter-spacing="-2">CivicShield AI</text>
-  <text x="300" y="230" fill="#2563EB" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="17" font-weight="800" letter-spacing="3">PUBLIC HELP, VERIFIED</text>
-  <text x="107" y="395" fill="#0F172A" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="72" font-weight="900" letter-spacing="-5">Find public help without getting lost.</text>
-  <text x="112" y="462" fill="#475569" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="28" font-weight="500">Official sources • Clear next steps • Safe AI that refuses to guess</text>
-  <rect x="812" y="126" width="240" height="56" rx="28" fill="#0F172A"/>
-  <text x="855" y="162" fill="white" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="18" font-weight="800">Ask for help now</text>
   <defs>
-    <linearGradient id="shield" x1="115" y1="150" x2="245" y2="292" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#38BDF8"/>
-      <stop offset="0.5" stop-color="#2563EB"/>
-      <stop offset="1" stop-color="#10B981"/>
+    <linearGradient id="bg" x1="90" y1="70" x2="1090" y2="610" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F8FBFF"/>
+      <stop offset="0.4" stop-color="#EEF4FF"/>
+      <stop offset="1" stop-color="#ECFEF6"/>
     </linearGradient>
+    <radialGradient id="orb1" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(260 120) rotate(40) scale(360 220)">
+      <stop stop-color="#60A5FA" stop-opacity="0.34"/>
+      <stop offset="1" stop-color="#60A5FA" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="orb2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(980 180) rotate(130) scale(320 180)">
+      <stop stop-color="#14B8A6" stop-opacity="0.24"/>
+      <stop offset="1" stop-color="#14B8A6" stop-opacity="0"/>
+    </radialGradient>
   </defs>
+  <rect width="1200" height="630" rx="36" fill="url(#bg)"/>
+  <rect width="1200" height="630" rx="36" fill="url(#orb1)"/>
+  <rect width="1200" height="630" rx="36" fill="url(#orb2)"/>
+  <g transform="translate(116 125)">
+    <path d="M128 22C157.957 42.4731 189.657 52.7014 222 53.7254V113.391C222 162.704 190.091 207.396 142.441 224.807L128 230L113.559 224.807C65.9094 207.396 34 162.704 34 113.391V53.7254C66.3432 52.7014 98.043 42.4731 128 22Z" fill="url(#shieldGrad)"/>
+    <defs>
+      <linearGradient id="shieldGrad" x1="34" y1="22" x2="222" y2="230" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#7DD3FC"/>
+        <stop offset="0.34" stop-color="#3B82F6"/>
+        <stop offset="0.72" stop-color="#1D4ED8"/>
+        <stop offset="1" stop-color="#14B8A6"/>
+      </linearGradient>
+    </defs>
+    <path d="M128 48C149.814 61.6634 172.612 68.9203 196 70.0197V110.133C196 148.456 172.307 183.896 136.681 197.145L128 200.374L119.319 197.145C83.693 183.896 60 148.456 60 110.133V70.0197C83.3884 68.9203 106.186 61.6634 128 48Z" fill="white" fill-opacity="0.14"/>
+    <path d="M87 106.5C87 101.253 91.2533 97 96.5 97H150C171.815 97 189.5 114.685 189.5 136.5C189.5 158.315 171.815 176 150 176H116.915C112.926 176 109.1 177.585 106.279 180.406L94.7426 191.942C91.9028 194.782 87 192.771 87 188.754V106.5Z" fill="white" fill-opacity="0.18"/>
+    <path d="M105 96C105 79.4315 118.431 66 135 66H159.5C176.069 66 189.5 79.4315 189.5 96V101H135C118.431 101 105 114.431 105 131V96Z" fill="white" fill-opacity="0.24"/>
+    <path d="M109 119.5C109 115.358 112.358 112 116.5 112H148.5C152.642 112 156 115.358 156 119.5C156 123.642 152.642 127 148.5 127H116.5C112.358 127 109 123.642 109 119.5Z" fill="white"/>
+    <path d="M109 146.5C109 142.358 112.358 139 116.5 139H160.5C164.642 139 168 142.358 168 146.5C168 150.642 164.642 154 160.5 154H116.5C112.358 154 109 150.642 109 146.5Z" fill="white" fill-opacity="0.92"/>
+    <circle cx="94" cy="119.5" r="7" fill="white"/>
+    <circle cx="94" cy="146.5" r="7" fill="white" fill-opacity="0.92"/>
+  </g>
+  <text x="430" y="250" fill="#0F172A" font-family="Inter, Arial, sans-serif" font-size="72" font-weight="800" letter-spacing="-2.8">CivicShield AI</text>
+  <text x="430" y="314" fill="#2563EB" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700" letter-spacing="3.5">OFFICIAL-SOURCE GROUNDED CIVIC GUIDANCE</text>
+  <text x="430" y="395" fill="#334155" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="500">Evidence-backed next steps with confidence signals,</text>
+  <text x="430" y="435" fill="#334155" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="500">safer refusal, and clear links back to official public services.</text>
+  <rect x="430" y="486" width="240" height="52" rx="26" fill="#0F172A"/>
+  <text x="470" y="520" fill="white" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700">Trust before hype</text>
 </svg>

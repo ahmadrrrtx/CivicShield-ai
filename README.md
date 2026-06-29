@@ -17,7 +17,7 @@
 </p>
 
 ## Why CivicShield AI exists
-CivicShield AI is built to help people navigate public benefits, government services, and urgent support pathways without sacrificing trust. The product is designed so the AI should not invent civic facts, should preserve citations, and should fail closed when evidence cannot be verified safely.
+CivicShield AI is built to help people navigate public benefits, government services, and urgent support pathways without sacrificing trust. The product is designed so the AI should not invent civic facts, should preserve visible citations, should communicate confidence honestly, and should fail closed when evidence cannot be verified safely.
 
 ## Screenshots and demo assets
 Add final deployed screenshots before hackathon submission:
