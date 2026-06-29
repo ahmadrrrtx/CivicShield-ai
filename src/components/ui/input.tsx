@@ -8,9 +8,10 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(({ className
     <input
       ref={ref}
       className={cn(
-        'flex h-11 w-full rounded-2xl border border-slate-200 bg-white/90 px-4 py-2 text-sm text-slate-950 shadow-sm transition-colors placeholder:text-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/70 dark:border-slate-800 dark:bg-slate-950/80 dark:text-white dark:placeholder:text-slate-500',
+        'flex h-11 w-full rounded-2xl border border-slate-200/80 bg-white/92 px-4 py-2 text-sm text-slate-950 shadow-sm transition-all placeholder:text-slate-400 focus-visible:outline-none focus-visible:ring-2 dark:border-slate-800/80 dark:bg-slate-950/85 dark:text-white dark:placeholder:text-slate-500',
         className
       )}
+      style={{ ['--tw-ring-color' as string]: 'var(--ring)' }}
       {...props}
     />
   );

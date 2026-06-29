@@ -1,11 +1,20 @@
 @import 'tailwindcss';
 
 :root {
-  --background: #f6f8fb;
-  --foreground: #0b1220;
-  --muted: #64748b;
+  --background: #f4f7fb;
+  --foreground: #081120;
+  --muted: #5f6f86;
   --card: rgba(255, 255, 255, 0.84);
-  --border: rgba(148, 163, 184, 0.22);
+  --card-strong: rgba(255, 255, 255, 0.94);
+  --surface-soft: rgba(255, 255, 255, 0.72);
+  --surface-elevated: rgba(255, 255, 255, 0.9);
+  --border: rgba(148, 163, 184, 0.2);
+  --border-strong: rgba(148, 163, 184, 0.34);
+  --ring: rgba(59, 130, 246, 0.72);
+  --shadow-soft: 0 12px 40px rgba(15, 23, 42, 0.08);
+  --shadow-medium: 0 18px 50px rgba(15, 23, 42, 0.12);
+  --shadow-strong: 0 28px 90px rgba(15, 23, 42, 0.16);
+  --glow-blue: 0 0 0 1px rgba(255, 255, 255, 0.7) inset, 0 18px 50px rgba(37, 99, 235, 0.12);
 }
 
 .dark {
@@ -13,7 +22,16 @@
   --foreground: #f8fafc;
   --muted: #94a3b8;
   --card: rgba(2, 6, 23, 0.72);
-  --border: rgba(51, 65, 85, 0.55);
+  --card-strong: rgba(8, 15, 31, 0.9);
+  --surface-soft: rgba(15, 23, 42, 0.62);
+  --surface-elevated: rgba(15, 23, 42, 0.82);
+  --border: rgba(51, 65, 85, 0.48);
+  --border-strong: rgba(71, 85, 105, 0.75);
+  --ring: rgba(96, 165, 250, 0.76);
+  --shadow-soft: 0 12px 40px rgba(0, 0, 0, 0.28);
+  --shadow-medium: 0 20px 60px rgba(0, 0, 0, 0.36);
+  --shadow-strong: 0 30px 90px rgba(0, 0, 0, 0.46);
+  --glow-blue: 0 0 0 1px rgba(255, 255, 255, 0.05) inset, 0 18px 60px rgba(37, 99, 235, 0.18);
 }
 
 html {
@@ -23,10 +41,14 @@ html {
 body {
   background:
     radial-gradient(circle at top, rgba(96, 165, 250, 0.12), transparent 30%),
-    radial-gradient(circle at 80% 0%, rgba(99, 102, 241, 0.12), transparent 25%),
+    radial-gradient(circle at 80% 0%, rgba(99, 102, 241, 0.1), transparent 25%),
+    radial-gradient(circle at 100% 18%, rgba(20, 184, 166, 0.08), transparent 22%),
     var(--background);
   color: var(--foreground);
   font-feature-settings: 'rlig' 1, 'calt' 1;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 ::selection {
@@ -38,7 +60,37 @@ body {
 }
 
 .focus-ring {
-  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/70;
+  @apply focus-visible:outline-none focus-visible:ring-2;
+  --tw-ring-color: var(--ring);
+}
+
+.surface-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(20px);
+}
+
+.surface-card-strong {
+  background: var(--card-strong);
+  border: 1px solid var(--border-strong);
+  box-shadow: var(--shadow-medium);
+  backdrop-filter: blur(22px);
+}
+
+.surface-panel {
+  background: var(--surface-soft);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(18px);
+}
+
+.surface-glow {
+  box-shadow: var(--glow-blue);
+}
+
+.text-balance-pretty {
+  text-wrap: balance;
 }
 
 .prose-legal h1,
